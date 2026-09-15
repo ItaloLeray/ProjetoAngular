@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { link } from 'fs';
 
 @Component({
   selector: 'app-menu',
@@ -9,4 +10,9 @@ import { Component } from '@angular/core';
 })
 
 export class MenuComponent {
+  itensMenu = [
+    { label: 'Inicio', link: '' },
+    { label: 'Clientes', link: '/clientes' },
+    { label: 'Sobre', link: '/sobre' },
+  ]
 }
