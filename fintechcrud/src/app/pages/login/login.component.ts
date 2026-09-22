@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +9,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+
+  constructor (private router: Router){};
 
   login: string = "";
   senha: string = "";
@@ -23,21 +26,13 @@ export class LoginComponent {
   }
 
   fazerLogin() {
-    if (this.login === 'admin' && this.senha === '123') {
+    if (this.login === 'admin@email.com' && this.senha === '123') {
       alert(`Bem-vindo ${this.login}!`);
+      this.router.navigate(['']);
     } else {
       alert('Dados inválidos');
     }
 
   }
 
-
-  onBotaoClicado() {
-    alert("Bem-vindo(a)!");
-  }
-
-
-  teclaDigitada(evento: KeyboardEvent): void {
-    alert("Usuário digitou " + evento.key);
-  }
 }
