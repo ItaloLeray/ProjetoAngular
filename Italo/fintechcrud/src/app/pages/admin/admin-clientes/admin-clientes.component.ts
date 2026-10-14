@@ -12,10 +12,28 @@ import { Cliente } from '../../../model/cliente';
 export class AdminClientesComponent implements OnInit {
 
   private service = inject(ClienteService);
+
   listaClientes: Cliente[] = [];
 
   ngOnInit(): void {
-    this.listaClientes = this.service.listar();
+    this.atualizarLista();
   }
 
+  atualizarLista(): void {
+    this.listaClientes = this.service.listar();
+  }
+  editar(id: number | undefined): void {
+    if (id === undefined) {
+      return;
+    }
+
+  }
+
+  excluir(id: number | undefined): void {
+    if (id === undefined) {
+      return;
+    }
+
+
+  }
 }
