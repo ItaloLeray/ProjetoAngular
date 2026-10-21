@@ -1,11 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ClienteService } from '../../../services/cliente.service';
 import { Cliente } from '../../../model/cliente';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin-clientes',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './admin-clientes.component.html',
   styleUrl: './admin-clientes.component.css'
 })
@@ -16,24 +17,21 @@ export class AdminClientesComponent implements OnInit {
   listaClientes: Cliente[] = [];
 
   ngOnInit(): void {
-    this.atualizarLista();
+    this.service.listar().subscribe({
+      next: (clientes) => {
+        this.listaClientes = clientes;
+      }
+    });
   }
 
-  atualizarLista(): void {
-    this.listaClientes = this.service.listar();
-  }
-  editar(id: number | undefined): void {
-    if (id === undefined) {
-      return;
-    }
-
+  editar(id: string): void {
+    console.log('editar cliente:', id);
   }
 
-  excluir(id: number | undefined): void {
-    if (id === undefined) {
-      return;
-    }
-
-
+  excluir(id: string): void {
+    this.service.excluir(id).subscribe({
+      next: () => { this.listaClientes = this.listaClientes.filter(cliente => cliente.id !== id) }
+    })
   }
+
 }
