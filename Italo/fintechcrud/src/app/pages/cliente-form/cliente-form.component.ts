@@ -1,7 +1,7 @@
+
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Cliente } from '../../model/cliente';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ClienteService } from '../../services/cliente.service';
 
@@ -13,12 +13,12 @@ import { ClienteService } from '../../services/cliente.service';
   styleUrl: './cliente-form.component.css'
 })
 export class ClienteFormComponent {
-  cliente:Cliente = {} as Cliente;
+  cliente: Cliente = {} as Cliente;
   private service = inject(ClienteService);
   private router = inject(Router);
-  confirmarSenha:string = ""
+  confirmarSenha: string = '';
 
-  salvar() {
+  salvar(): void {
     if (this.cliente.senha !== this.confirmarSenha) {
       alert('As senhas não são iguais.');
       return;
@@ -27,10 +27,9 @@ export class ClienteFormComponent {
     this.service.incluir(this.cliente).subscribe({
       next: (cliente) => {
         this.cliente = cliente;
-        alert("Cliente cadastrado com sucesso");
-        this.router.navigate(["/admin-clientes-listar"]);
-
+        alert('Cliente cadastrado com sucesso');
+        this.router.navigate(['/admin-clientes-listar']);
       }
-    })
-  }//Fim do salvar
+    });
+  }
 }
